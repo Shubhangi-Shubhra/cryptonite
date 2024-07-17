@@ -10,48 +10,45 @@ import Crypto from './pages/Crypto';
 import Trending from './pages/Trending';
 import Saved from './pages/Saved';
 import CryptoDetails from './components/CryptoDetails';
+import HomePage from './pages/HomePage';
+import News from './pages/News';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-    children:[
+    children: [
       {
-        path:"/",
-        element: <Crypto />,
-        children: [
-          {
-            path:":coinId",
-            element: <CryptoDetails />
-          }
-        ]
+        path: "/",
+        element: <HomePage />
       },
       {
-        path:"/trending",
-        element: <Trending />,
-        children: [
-          {
-            path:":coinId",
-            element: <CryptoDetails />
-          }
-        ]
+        path: "/crypto",
+        element: <Crypto />
       },
       {
-        path:"/saved",
-        element: <Saved />,
-        children: [
-          {
-            path:":coinId",
-            element: <CryptoDetails />
-          }
-        ]
+        path: "/crypto/:coinId",
+        element: <CryptoDetails />
+      },
+      {
+        path: ":coinId",
+        element: <CryptoDetails />
+      },
+      {
+        path: "/news",
+        element: <News />
+      },
+      {
+        path: "/trending",
+        element: <Trending />
+      },
+      {
+        path: "/saved",
+        element: <Saved />
       }
     ]
-
-
   },
 ]);
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -59,8 +56,3 @@ root.render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();

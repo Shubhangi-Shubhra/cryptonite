@@ -1,5 +1,4 @@
 import React, { useLayoutEffect, useState } from "react";
-
 import {
   LineChart,
   Line,
@@ -12,6 +11,7 @@ import {
 } from "recharts";
 import { useContext } from "react";
 import { CryptoContext } from "./../context/CryptoContext";
+import "./Chart.css"; // Import the updated CSS file
 
 function CustomTooltip({ payload, label, active, currency = "usd" }) {
   if (active && payload && payload.length > 0) {
@@ -72,8 +72,6 @@ const Chart = ({ id }) => {
           .then((res) => res.json())
           .then((json) => json);
 
-        // console.log("chart-data", data);
-
         let convertedData = data[type].map((item) => {
           return {
             date: new Date(item[0]).toLocaleDateString(),
@@ -81,7 +79,6 @@ const Chart = ({ id }) => {
           };
         });
 
-        // console.log(convertedData);
         setChartData(convertedData);
       } catch (error) {
         console.log(error);
@@ -94,9 +91,9 @@ const Chart = ({ id }) => {
   return (
     <div className="w-full h-[60%]">
       <ChartComponent data={chartData} currency={currency} type={type} />
-      <div className="flex">
+      <div className="flex flex-wrap justify-center mt-2">
         <button
-          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded capitalize ${
+          className={`text-sm py-0.5 px-1.5 m-1 bg-opacity-25 rounded capitalize ${
             type === "prices"
               ? "bg-cyan text-cyan"
               : "bg-gray-200 text-gray-100"
@@ -106,28 +103,28 @@ const Chart = ({ id }) => {
           Price
         </button>
         <button
-          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded capitalize ${
+          className={`text-sm py-0.5 px-1.5 m-1 bg-opacity-25 rounded capitalize ${
             type === "market_caps"
               ? "bg-cyan text-cyan"
               : "bg-gray-200 text-gray-100"
           }`}
           onClick={() => setType("market_caps")}
         >
-          market caps
+          Market Caps
         </button>
         <button
-          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded capitalize ${
+          className={`text-sm py-0.5 px-1.5 m-1 bg-opacity-25 rounded capitalize ${
             type === "total_volumes"
               ? "bg-cyan text-cyan"
               : "bg-gray-200 text-gray-100"
           }`}
           onClick={() => setType("total_volumes")}
         >
-          total volumes
+          Total Volumes
         </button>
 
         <button
-          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded capitalize ${
+          className={`text-sm py-0.5 px-1.5 m-1 bg-opacity-25 rounded capitalize ${
             days === 7 ? "bg-cyan text-cyan" : "bg-gray-200 text-gray-100"
           }`}
           onClick={() => setDays(7)}
@@ -135,7 +132,7 @@ const Chart = ({ id }) => {
           7d
         </button>
         <button
-          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded capitalize ${
+          className={`text-sm py-0.5 px-1.5 m-1 bg-opacity-25 rounded capitalize ${
             days === 14 ? "bg-cyan text-cyan" : "bg-gray-200 text-gray-100"
           }`}
           onClick={() => setDays(14)}
@@ -143,7 +140,7 @@ const Chart = ({ id }) => {
           14d
         </button>
         <button
-          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded capitalize ${
+          className={`text-sm py-0.5 px-1.5 m-1 bg-opacity-25 rounded capitalize ${
             days === 30 ? "bg-cyan text-cyan" : "bg-gray-200 text-gray-100"
           }`}
           onClick={() => setDays(30)}

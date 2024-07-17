@@ -16,7 +16,7 @@ const Home = () => {
     content-center items-center relative text-white font-nunito
     "
           >
-            <div className="w-screen h-screen bg-gray-300 fixed -z-10" />
+            <div className="w-screen h-screen bg-black fixed -z-10" />
             <Logo />
             <Navigation />
 
